@@ -10,3 +10,7 @@ h4 {
 p {
   font-size: 20px;
 }
+
+:root {
+  --dialogue_border : rgb(119, 184, 228);
+}
