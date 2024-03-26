@@ -1,13 +1,13 @@
 import React from "react";
 import "./Dialogue.css";
 
-export default function Dialogue({ nom, children }) {
+export default function Dialogue({ nom, onClick, children }) {
   return (
     <div id="Dialogue">
       <div className="Background">
         <div className="Bottom-container">
           <img src="" className="Profil" alt="Profile"></img>
-          <div className="CadreDialogue">
+          <div className="CadreDialogue" onClick={onClick}>
             <h4 className="Nom">{nom}</h4>
             <p className="Dialogue">{children}</p>
             <div className="indicateur">

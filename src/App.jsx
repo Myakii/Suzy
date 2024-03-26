@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import "./css/0.Global/index.css";
-import Chapitre1 from "./Histoire/Chapitre1/ACT0"
+import Chap1Act0 from "./Histoire/Chapitre1/ACT0"
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Chapitre1 />} />
+          <Route path="/" element={<Chap1Act0 />} />
 
           {/* Autres routes */}
         </Routes>
