@@ -1,13 +1,4 @@
-#Dialogue {
-    height: 100vh;
-}
-
-#Dialogue .Background {
-    height: 100vh;
-    background-color: black;
-}
-
-#Dialogue .CadreDialogue {
+.Bottom-container .CadreDialogue {
     height: 250px;
     width: 75%;
     border: 1px solid white;
@@ -19,7 +10,7 @@
     border: 5px solid var(--dialogue_border);
 }
 
-#Dialogue .Bottom-container .Profil {
+.Nom .Profil {
     height: 250px;
     width: 250px;
     border: 1px solid white;
@@ -31,26 +22,26 @@
     border: 5px solid var(--dialogue_border);
 }
 
-#Dialogue .Nom {
+.Bottom-container .Nom {
     padding: 20px 30px 20px 30px;
     color: black;
 }
 
-#Dialogue .Dialogue {
+.Bottom-container .Dialogue {
     color: black;
     padding: 0px 30px 0px 30px;
 }
 
 /* Icône */
 
-#Dialogue .CadreDialogue .indicateur {
+.Bottom-container .CadreDialogue .indicateur {
     position: absolute;
     bottom: 0;
     right: 0;
     margin: 20px;
 }
 
-#Dialogue .CadreDialogue svg {
+.Bottom-container .CadreDialogue svg {
     height: 40px;
     animation: moveUpDown 0.8s ease-in-out infinite;
 }

@@ -1,66 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../../css/Chapitre1css/ACT0.css";
 import Dialogue from "../../components/Dialogue";
 import Alarme from "../../Assets/Sons/alarm_clock.mp3";
+import Bgm_Chambre_Suzy from '../../Assets/Musiques/Golden_Eye.mp3';
 
 const ACT0 = () => {
-  const dialogues1 = [
+  const dialogues = [
     {
       nom: "???",
-      texte:
-        " Tu sais que tout ira bien, bien qu'on ne soit plus que deux, n'est-ce pas ?",
+      texte: " Tu sais que tout ira bien, bien qu'on ne soit plus que deux, n'est-ce pas ?",
     },
     { nom: "???", texte: "..." },
     { nom: "???", texte: "Je t'aimerai toute ma vie, ma pe..." },
-  ];
-  const dialogues2 = [
     { nom: " ", texte: "Bip...bip...bip" },
     { nom: "???", texte: "Il est déjà 7h...?" },
+    { nom: "???", texte: "Arg..." },
+    { nom: "???", texte: "Je devrais me préparer et aller déjeuner." }
   ];
 
-  const [index1, setIndex1] = useState(0);
-  const [index2, setIndex2] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isBgmPlaying, setIsBgmPlaying] = useState(false);
 
-  const handleClick1 = () => {
-    if (index1 < dialogues1.length - 1) {
-      setIndex1((prevIndex) => prevIndex + 1);
-      setIsPlaying(true);
+  const bgmVolume = 0.1
+
+  const handleClick = () => {
+    if (currentIndex < dialogues.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      if (currentIndex === 5) {
+        setIsPlaying(false); // Arrêter le son avant d'afficher le troisième dialogue
+      }
+      if (currentIndex === 2) {
+        setIsPlaying(true); // Démarrer le son avant d'afficher le troisième dialogue
+      }
     } else {
-      // Passer au premier dialogue du deuxième ensemble une fois que tous les dialogues du premier ensemble ont été affichés
-      setIndex2(0);
+      setIsPlaying(false);
     }
   };
 
-  const handleClick2 = () => {
-    if (index2 < dialogues2.length - 1) {
-      setIndex2((prevIndex) => prevIndex + 1);
-      setIsPlaying(true);
+  useEffect(() => {
+    if (currentIndex === dialogues.length - 1) {
+      setIsPlaying(false);
+      setIsBgmPlaying(true);
     }
-  };
-
-  const handleAudioEnd = () => {
-    setIsPlaying(false);
-  };
+  }, [currentIndex, dialogues]);
 
   return (
     <div id="chapitre1">
-      {index1 < dialogues1.length && (
-        <Dialogue nom={dialogues1[index1].nom} onClick={handleClick1}>
-          {dialogues1[index1].texte}
-        </Dialogue>
+      <Dialogue nom={dialogues[currentIndex].nom} onClick={handleClick}>
+        {dialogues[currentIndex].texte}
+      </Dialogue>
+      {isPlaying && ( // Ajout de la condition pour déclencher le son après le dialogue "Bip...bip...bip"
+        <audio src={Alarme} autoPlay loop />
       )}
-      {index1 === dialogues1.length - 1 && (
-        <>
-          <Dialogue nom={dialogues2[index2].nom} onClick={handleClick2}>
-            {dialogues2[index2].texte}
-          </Dialogue>
-          {isPlaying && (
-            <audio src={Alarme} autoPlay onEnded={handleAudioEnd} />
-          )}
-        </>
-      )}
+      {isBgmPlaying && (
+        <audio src={Bgm_Chambre_Suzy} autoPlay loop onVolumeChange={bgmVolume}/>)}
     </div>
   );
 };

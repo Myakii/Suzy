@@ -1,3 +1,20 @@
 #chapitre1 {
-    color: white;
+    height: 100vh;
+}
+
+#chapitre1 .dialogue1 {
+    background-color: black;
+    height: 100%;
+}
+
+#chapitre1 .dialogue2 {
+    background-color: black;
+    height: 100%;
+}
+
+#chapitre1 .dialogue3 {
+    background-image: url('src/Assets/Fonds/bg_chambre_suzy.jpg');
+    height: 100%;
+    transition:opacity 2s;
+    -webkit-transition: opacity 2s;  
 }
