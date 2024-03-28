@@ -10,7 +10,7 @@
     border: 5px solid var(--dialogue_border);
 }
 
-.Nom .Profil {
+.Bottom-container .Profil {
     height: 250px;
     width: 250px;
     border: 1px solid white;
