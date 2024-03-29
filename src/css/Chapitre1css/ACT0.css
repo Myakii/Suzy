@@ -12,9 +12,24 @@
     height: 100%;
 }
 
-#chapitre1 .dialogue3 {
+
+#chapitre1 .Bg_Chambre {
     background-image: url('src/Assets/Fonds/bg_chambre_suzy.jpg');
     height: 100%;
     transition:opacity 2s;
     -webkit-transition: opacity 2s;  
 }
+
+#chapitre1 .Suzy_Pyjama_Neutre {
+    background-image: url('../../Assets/Profils/Suzy/Pyjama_Neutre.png');
+    width: 615px; 
+    height: 600px; 
+    background-size: contain; /* Ajuste la taille de l'image pour qu'elle tienne entièrement dans l'élément */
+    background-position: center; /* Centre l'image horizontalement et verticalement */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image si elle est plus petite que l'élément */
+    position: fixed;
+    bottom: 200px;
+    right: 0px;
+    margin: 0 50px 50px 90px;
+    z-index: 0;
+  }

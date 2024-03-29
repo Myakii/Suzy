@@ -1,25 +1,12 @@
 .Bottom-container .CadreDialogue {
     height: 250px;
-    width: 75%;
+    width: 99.5%;
     border: 1px solid white;
     position: fixed;
     bottom: 0px;
-    right: 0px;
-    margin: 0 50px 50px 90px;
     background-color: white;
     border: 5px solid var(--dialogue_border);
-}
-
-.Bottom-container .Profil {
-    height: 250px;
-    width: 250px;
-    border: 1px solid white;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    margin: 0 50px 50px 90px;
-    background-color: white;
-    border: 5px solid var(--dialogue_border);
+    z-index: 1;
 }
 
 .Bottom-container .Nom {
