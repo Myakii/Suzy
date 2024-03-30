@@ -2,23 +2,22 @@
     height: 100vh;
 }
 
-#chapitre1 .dialogue1 {
-    background-color: black;
-    height: 100%;
-}
-
-#chapitre1 .dialogue2 {
+#chapitre1 .Bg_Black {
     background-color: black;
     height: 100%;
 }
 
 
-#chapitre1 .Bg_Chambre {
+#chapitre1 .Bg_Chambre_Suzy {
     background-image: url('src/Assets/Fonds/bg_chambre_suzy.jpg');
     height: 100%;
-    transition:opacity 2s;
-    -webkit-transition: opacity 2s;  
+
+    -webkit-animation: fadeInFromNone 1.5s ease-out;
+    -moz-animation: fadeInFromNone 1.5s ease-out;
+    -o-animation: fadeInFromNone 1.5s ease-out;
+    animation: fadeInFromNone 1.5s ease-out;
 }
+
 
 #chapitre1 .Suzy_Pyjama_Neutre {
     background-image: url('../../Assets/Profils/Suzy/Pyjama_Neutre.png');
@@ -32,4 +31,10 @@
     right: 0px;
     margin: 0 50px 50px 90px;
     z-index: 0;
+
+    -webkit-animation: fadeInFromNone 2 ease-out;
+    -moz-animation: fadeInFromNone 2s ease-out;
+    -o-animation: fadeInFromNone 2s ease-out;
+    animation: fadeInFromNone 2s ease-out;
+
   }

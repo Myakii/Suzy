@@ -5,7 +5,6 @@ import Dialogue from "../../components/Dialogue";
 // Assets
 import Alarme from "../../Assets/Sons/alarm_clock.mp3";
 import Bgm_Chambre_Suzy from '../../Assets/Musiques/Golden_Eye.mp3';
-import Bg_Chambre_Suzy from '../../Assets/Fonds/bg_chambre_suzy.jpg'
 
 const ACT0 = () => {
   const dialogues = [
@@ -16,32 +15,41 @@ const ACT0 = () => {
     { nom: "???", texte: "..." },
     { nom: "???", texte: "Je t'aimerai toute ma vie, ma pe..." },
     { nom: " ", texte: "Bip...bip...bip" },
-    { nom: "???", texte: "Il est déjà 7h...?" },
+    { nom: "???", texte: "Hmm...Il est déjà 7h...?" },
     { nom: "???", texte: "Arg..." },
     { nom: "???", texte: "Je devrais me préparer et aller déjeuner." }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  // Audios
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBgmPlaying, setIsBgmPlaying] = useState(false);
-  const [isBg, setIsBg] = useState(false);
+  // IMGS
+  const [isBgChambre, setIsBgChambre] = useState(false);
+  const [isBgBack, setIsBgBack] = useState(false);
+  // IMGS PROFILS
   const [isProfil, setIsProfil] = useState(false);
 
   const handleClick = () => {
     if (currentIndex < dialogues.length - 1) {
       setCurrentIndex(currentIndex + 1);
       if (currentIndex === 5) {
-        setIsPlaying(false); // Arrêter le son avant d'afficher le troisième dialogue
-        setIsBg(true); // Faire apparaitre le background de la chambre
+        setIsPlaying(false); // Arrêter le son du réveil
+        setIsBgBack(false)
+        setIsBgChambre(true); // Faire apparaitre le background de la chambre
         setIsProfil(true); // Faire apparaitre le profil
       }
       if (currentIndex === 2) {
-        setIsPlaying(true); // Démarrer le son avant d'afficher le troisième dialogue
+        setIsPlaying(true); // Démarrer le son du réveil
+      }
+      if (currentIndex === 0) {
+        setIsBgBack(true); // Apparaitre bg noir
       }
     } else {
       setIsPlaying(false);
-      setIsBg(false)
+      setIsBgChambre(false)
       setIsProfil(false)
+      setIsBgBack(false)
     }
   };
 
@@ -57,14 +65,20 @@ const ACT0 = () => {
       <Dialogue nom={dialogues[currentIndex].nom} onClick={handleClick}>
         {dialogues[currentIndex].texte}
       </Dialogue>
+      {/* Audios */}
       {isPlaying && ( // Ajout de la condition pour déclencher le son après le dialogue "Bip...bip...bip"
         <audio src={Alarme} autoPlay loop />
       )}
       {isBgmPlaying && (
         <audio src={Bgm_Chambre_Suzy} autoPlay loop />)}
-      {isBg && (
-        <div className="Bg_Chambre"></div>
+        {/* Backgrounds */}
+      {isBgChambre && (
+        <div className="Bg_Chambre_Suzy"></div>
       )}
+      {isBgBack && (
+        <div className="Bg_Black"></div>
+      )}
+      {/* Profils */}
       {isProfil && (
         <div className="Suzy_Pyjama_Neutre"></div>
       )}
