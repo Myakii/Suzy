@@ -17,6 +17,7 @@ const ACT0 = () => {
     { nom: " ", texte: "Bip...bip...bip" },
     { nom: "???", texte: "Hmm...Il est déjà 7h...?" },
     { nom: "???", texte: "Arg..." },
+    { nom: "???", texte: "..." },
     { nom: "???", texte: "Je devrais me préparer et aller déjeuner." }
   ];
 
@@ -24,18 +25,32 @@ const ACT0 = () => {
   // Audios
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBgmPlaying, setIsBgmPlaying] = useState(false);
+
+  const bgmVolume = 0.2;
   // IMGS
   const [isBgChambre, setIsBgChambre] = useState(false);
   const [isBgBack, setIsBgBack] = useState(false);
   // IMGS PROFILS
   const [isProfil, setIsProfil] = useState(false);
 
+  // Mode de jeu
+  const [isIconArmoire, setIsIconArmoire] = useState(false);
+  const [isIconPorteChambreSuzy, setIsIconPorteChambreSuzy] = useState(false);
+
   const handleClick = () => {
     if (currentIndex < dialogues.length - 1) {
       setCurrentIndex(currentIndex + 1);
+      if (currentIndex === 6) {
+        setIsProfil(false);
+        setIsIconArmoire(true);
+        setIsIconPorteChambreSuzy(true);
+        setDisplayText(false);
+      }
+
       if (currentIndex === 5) {
         setIsPlaying(false); // Arrêter le son du réveil
-        setIsBgBack(false)
+        setIsBgBack(false);
+        setIsBgmPlaying(true);
         setIsBgChambre(true); // Faire apparaitre le background de la chambre
         setIsProfil(true); // Faire apparaitre le profil
       }
@@ -43,22 +58,22 @@ const ACT0 = () => {
         setIsPlaying(true); // Démarrer le son du réveil
       }
       if (currentIndex === 0) {
+        setDisplayText(true);
         setIsBgBack(true); // Apparaitre bg noir
       }
     } else {
       setIsPlaying(false);
-      setIsBgChambre(false)
-      setIsProfil(false)
-      setIsBgBack(false)
+      setIsBgChambre(false);
+      setIsProfil(false);
+      setIsBgBack(false);
     }
   };
 
   useEffect(() => {
-    if (currentIndex === dialogues.length - 1) {
-      setIsPlaying(false);
-      setIsBgmPlaying(true);
+    if (currentIndex === 0) {
+      setIsBgBack(true); // Apparaitre bg noir au chargement de la page
     }
-  }, [currentIndex, dialogues]);
+  }, []); // Le tableau vide en seconde argument signifie que cet effet ne s'exécutera qu'une seule fois, au chargement initial de la page
 
   return (
     <div id="chapitre1">
@@ -66,12 +81,12 @@ const ACT0 = () => {
         {dialogues[currentIndex].texte}
       </Dialogue>
       {/* Audios */}
-      {isPlaying && ( // Ajout de la condition pour déclencher le son après le dialogue "Bip...bip...bip"
+      {isPlaying && (
         <audio src={Alarme} autoPlay loop />
       )}
       {isBgmPlaying && (
-        <audio src={Bgm_Chambre_Suzy} autoPlay loop />)}
-        {/* Backgrounds */}
+        <audio src={Bgm_Chambre_Suzy} autoPlay loop volume={bgmVolume} />)}
+      {/* Backgrounds */}
       {isBgChambre && (
         <div className="Bg_Chambre_Suzy"></div>
       )}
@@ -81,6 +96,25 @@ const ACT0 = () => {
       {/* Profils */}
       {isProfil && (
         <div className="Suzy_Pyjama_Neutre"></div>
+      )}
+      {/* Mode de jeu */}
+      {isIconArmoire && (
+        <div className="Icon_Armoire">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <path
+              fill="#c00000"
+              d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"
+            />
+          </svg></div>
+      )}
+      {isIconPorteChambreSuzy && (
+        <div className="Icon_Porte_Chambre_Suzy">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <path
+              fill="#c00000"
+              d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"
+            />
+          </svg></div>
       )}
     </div>
   );

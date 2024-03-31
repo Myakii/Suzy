@@ -1,12 +1,14 @@
 .Bottom-container .CadreDialogue {
     height: 250px;
-    width: 99.5%;
-    border: 1px solid white;
+    width: 1500px;
     position: fixed;
     bottom: 0px;
-    background-color: white;
+    background-color: #FFF;
     border: 5px solid var(--dialogue_border);
+    border-radius: 10px;
     z-index: 1;
+    margin-left: 11%;
+    margin-bottom: 10px;
 }
 
 .Bottom-container .Nom {
@@ -33,13 +35,4 @@
     animation: moveUpDown 0.8s ease-in-out infinite;
 }
 
-@keyframes moveUpDown {
-    0%, 100% {
-      transform: translateY(-10%);
-    }
-    50% {
-      transform: translateY(10%);
-    }
-  }
-  
 

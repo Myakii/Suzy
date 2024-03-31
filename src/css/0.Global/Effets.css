@@ -1,3 +1,4 @@
+/* Apparition */
 @-webkit-keyframes fadeInFromNone {
     0% {
         display: none;
@@ -65,3 +66,15 @@
         opacity: 1;
     }
 }
+
+/* Icône */
+
+@keyframes moveUpDown {
+    0%, 100% {
+      transform: translateY(-10%);
+    }
+    50% {
+      transform: translateY(10%);
+    }
+  }
+  

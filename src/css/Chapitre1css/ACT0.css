@@ -9,32 +9,45 @@
 
 
 #chapitre1 .Bg_Chambre_Suzy {
-    background-image: url('src/Assets/Fonds/bg_chambre_suzy.jpg');
+    background-image: url('src/Assets/Fonds/bg_chambre_suzy_matin.jpg');
     height: 100%;
 
-    -webkit-animation: fadeInFromNone 1.5s ease-out;
-    -moz-animation: fadeInFromNone 1.5s ease-out;
-    -o-animation: fadeInFromNone 1.5s ease-out;
-    animation: fadeInFromNone 1.5s ease-out;
+    -webkit-animation: fadeInFromNone 3s ease-out;
+    -moz-animation: fadeInFromNone 3s ease-out;
+    -o-animation: fadeInFromNone 3s ease-out;
+    animation: fadeInFromNone 3s ease-out;
 }
 
 
 #chapitre1 .Suzy_Pyjama_Neutre {
     background-image: url('../../Assets/Profils/Suzy/Pyjama_Neutre.png');
-    width: 615px; 
-    height: 600px; 
-    background-size: contain; /* Ajuste la taille de l'image pour qu'elle tienne entièrement dans l'élément */
-    background-position: center; /* Centre l'image horizontalement et verticalement */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image si elle est plus petite que l'élément */
+    width: 615px;
+    height: 600px;
+    background-size: contain;
+    /* Ajuste la taille de l'image pour qu'elle tienne entièrement dans l'élément */
+    background-position: center;
+    /* Centre l'image horizontalement et verticalement */
+    background-repeat: no-repeat;
+    /* Empêche la répétition de l'image si elle est plus petite que l'élément */
     position: fixed;
-    bottom: 200px;
-    right: 0px;
-    margin: 0 50px 50px 90px;
+    bottom: 250px;
+    right: 160px;
     z-index: 0;
 
-    -webkit-animation: fadeInFromNone 2 ease-out;
-    -moz-animation: fadeInFromNone 2s ease-out;
-    -o-animation: fadeInFromNone 2s ease-out;
-    animation: fadeInFromNone 2s ease-out;
+    -webkit-animation: fadeInFromNone 4s ease-out;
+    -moz-animation: fadeInFromNone 4s ease-out;
+    -o-animation: fadeInFromNone 4s ease-out;
+    animation: fadeInFromNone 4s ease-out;
 
-  }
+}
+
+#chapitre1 .Icon_Armoire, .Icon_Porte_Chambre_Suzy {
+    background-color: transparent;
+}
+#chapitre1 .Icon_Armoire svg, #chapitre1 .Icon_Porte_Chambre_Suzy svg  {
+    height: 40px;
+    animation: moveUpDown 0.8s ease-in-out infinite;
+    width: 40px;
+    margin: auto;
+
+}

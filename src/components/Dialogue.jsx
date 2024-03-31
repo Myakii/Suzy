@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../css/Components/Dialogue.css'
 
 export default function Dialogue({ nom, onClick, children, className }) {
   return (
-    <div className={`Bottom-container ${className}`} onClick={onClick}>
+    <div className={`Bottom-container ${className}`}>
       <div className="CadreDialogue" onClick={onClick}>
         <h4 className="Nom">{nom}</h4>
         <p className="Dialogue">{children}</p>
