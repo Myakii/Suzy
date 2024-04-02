@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import '../css/Components/Dialogue.css'
 
 export default function Dialogue({ nom, onClick, children, className }) {

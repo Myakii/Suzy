@@ -19,7 +19,7 @@
 }
 
 
-#chapitre1 .Suzy_Pyjama_Neutre {
+#chapitre1 .Suzy_Pyjama_Neutre_Cinematique {
     background-image: url('../../Assets/Profils/Suzy/Pyjama_Neutre.png');
     width: 615px;
     height: 600px;
@@ -41,13 +41,47 @@
 
 }
 
-#chapitre1 .Icon_Armoire, .Icon_Porte_Chambre_Suzy {
+#chapitre1 .Icon_Armoire, #chapitre1 .Icon_Porte_Chambre_Suzy {
     background-color: transparent;
+    position: absolute;
 }
+
+#chapitre1 .Icon_Armoire {
+    top: 530px;
+    right: 330px;
+    cursor: pointer;
+}
+
+#chapitre1 .Icon_Porte_Chambre_Suzy {
+    top: 300px;
+    left: 350px;
+    cursor: pointer;
+}
+
 #chapitre1 .Icon_Armoire svg, #chapitre1 .Icon_Porte_Chambre_Suzy svg  {
     height: 40px;
     animation: moveUpDown 0.8s ease-in-out infinite;
     width: 40px;
-    margin: auto;
+}
 
+#chapitre1 .Suzy_Pyjama_Neutre_Gameplay {
+    background-image: url('../../Assets/Profils/Suzy/Pyjama_Neutre.png');
+    width: 615px;
+    height: 600px;
+    background-size: contain;
+    /* Ajuste la taille de l'image pour qu'elle tienne entièrement dans l'élément */
+    background-position: center;
+    /* Centre l'image horizontalement et verticalement */
+    background-repeat: no-repeat;
+    /* Empêche la répétition de l'image si elle est plus petite que l'élément */
+    position: fixed;
+    bottom: 250px;
+    right: 160px;
+    z-index: 1;
+}
+
+/* RETIRER MUSIQUE CONTROLS */
+.Bgm_Chambre_Suzy {
+    position: absolute;
+    opacity: 0.1;
 }
