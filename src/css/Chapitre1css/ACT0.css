@@ -85,3 +85,8 @@
     position: absolute;
     opacity: 0.1;
 }
+
+.Bg_Black_Non_Cinematique {
+    background-color: black;
+    height: 100%;
+}

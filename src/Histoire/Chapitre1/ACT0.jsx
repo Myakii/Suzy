@@ -28,11 +28,18 @@ const ACT0 = () => {
   ];
 
   const interactions = [
-    { nom: "???", texte: " Je devrais d'abord m'habiller" }
+    { nom: "???", texte: " Je devrais d'abord m'habiller." }
   ];
+
+  const interactionsArmoire = [
+    { nom: "???", texte: "..." },
+    { nom: "???", texte: "Bien, je suis prête ! C'est étrange, aujourd'hui, j'ai vraiment envie d'aller à l'école." },
+    { nom: "???", texte: "Ce n'est pas tous les jours qu'on a ce genre de sentiment. Peut-être que quelque chose de bien va se produire ?" },
+  ]
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [interactionsIndex, setInteractionsIndex] = useState(0);
+  const [interactionsIndex2, setInteractionsIndex2] = useState(0);
   const [isDisplayText, setDisplayText] = useState(false);
 
   // Audios
@@ -52,6 +59,11 @@ const ACT0 = () => {
   const [isIconArmoire, setIsIconArmoire] = useState(false);
   const [isIconPorteChambreSuzy, setIsIconPorteChambreSuzy] = useState(false);
   const [isShowDialogueGamePlay, setIsShowDialogueGamePlay] = useState(false);
+
+  const [isBgBackNonCinematique, setIsBgBackNonCinematique] = useState(false);
+
+
+  const habiller = false;
 
 
   const handleClick = () => {
@@ -95,21 +107,60 @@ const ACT0 = () => {
 
   const handleClickInteraction = () => {
     setInteractionsIndex(interactionsIndex + 1);
+    setIsBgChambre(true);
+    setIsIconPorteChambreSuzy(true);
+    setIsIconArmoire(true);
+    setIsBgBack(false);
   }
 
-  const handleShowDialogueGamePlay = () => {
-    const habiller = false;
+  const handleClickInteraction2 = () => {
+    setInteractionsIndex2(interactionsIndex2 + 1);
+  
+    setIsBgBack(true); // Mettre le fond noir lorsque l'interaction est terminée
+    setIsIconArmoire(false);
+    setIsIconPorteChambreSuzy(false);
+    setIsBgBackNonCinematique(false); // Mettre isBgBackNonCinematique à faux lorsque l'interaction est terminée
+  };
+  
+  const handleShowDialogueGamePlay = (habiller) => {
 
-    // Si les conditons ne sont pas remplies, affiche le dialogue
+    // Si les conditons ne sont pas remplies, affiche le dialogue Porte Chambre de Suzy
     if (habiller === true) {
       setIsShowDialogueGamePlay(false);
       setIsProfilSuzyPyjama(false);
-      // Alors suite de l'histoire
+      setIsBgBack(true);
     } else {
       setIsShowDialogueGamePlay(true);
       setIsProfilSuzyPyjama(true);
     }
     // A AJOUTER -> SINON SORTIE DE LA CHAMBRE
+  };
+
+
+  const handleClickHabits = () => {
+    const habiller = true;
+
+    if (habiller) {
+      setIsBgChambre(false);
+      setIsIconArmoire(false);
+      setIsIconPorteChambreSuzy(false);
+      setIsBgBackNonCinematique(true); // Déclenche la suite des actions lorsque isBgBackNonCinematique devient vrai
+    }
+  };
+
+  useEffect(() => {
+    if (isBgBackNonCinematique) {
+      setIsBgmEBougerLit(true);
+      setIsShowDialogueGamePlay(true);
+    }
+  }, [isBgBackNonCinematique]);
+
+
+  // Cette fonction peut être appelée lorsque vous avez terminé avec le dialogue
+  const handleDialogueEnd = () => {
+    setIsIconArmoire(true);
+    setIsIconPorteChambreSuzy(true);
+    setIsBgChambre(true);
   };
 
   useEffect(() => {
@@ -122,7 +173,7 @@ const ACT0 = () => {
   return (
     <div id="chapitre1">
       {/* Assure que dialogues[currentIndex] est défini avant d'essayer d'accéder à sa propriété 'nom'. */}
-      {isDisplayText && dialogues[currentIndex] && dialogues[currentIndex].nom && (
+      {isDisplayText && (
         <Dialogue nom={dialogues[currentIndex].nom} onClick={handleClick}>
           {dialogues[currentIndex].texte}
         </Dialogue>
@@ -165,7 +216,7 @@ const ACT0 = () => {
 
       {/* Mode de jeu */}
       {isIconArmoire && (
-        <div className="Icon_Armoire">
+        <div className="Icon_Armoire" onClick={handleClickHabits}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
             <path
               fill="#c00000"
@@ -174,6 +225,17 @@ const ACT0 = () => {
               d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"
             />
           </svg>
+          {isShowDialogueGamePlay && (
+            <Dialogue
+              nom={interactionsArmoire[interactionsIndex2].nom}
+              onClick={handleClickInteraction2}
+            >
+              {interactionsArmoire[interactionsIndex2].texte}
+            </Dialogue>
+          )}
+          {isBgBackNonCinematique && (
+            <div className="Bg_Black_Non_Cinematique"></div>
+          )}
         </div>
       )}
       {isIconPorteChambreSuzy && (
