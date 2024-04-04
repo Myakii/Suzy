@@ -28,13 +28,16 @@ const ACT0 = () => {
   ];
 
   const interactions = [
-    { nom: "???", texte: " Je devrais d'abord m'habiller." }
+    { nom: "???", texte: " Je devrais d'abord m'habiller." },
+    { nom: "???", texte: "..." }
   ];
 
   const interactionsArmoire = [
     { nom: "???", texte: "..." },
     { nom: "???", texte: "Bien, je suis prête ! C'est étrange, aujourd'hui, j'ai vraiment envie d'aller à l'école." },
-    { nom: "???", texte: "Ce n'est pas tous les jours qu'on a ce genre de sentiment. Peut-être que quelque chose de bien va se produire ?" },
+    {
+      nom: "???", texte: "Ce n'est pas tous les jours qu'on a ce genre de sentiment. Peut-être que quelque chose de bien va se produire ?"
+    },
   ]
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,21 +49,22 @@ const ACT0 = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBgmPlaying, setIsBgmPlaying] = useState(false);
   const [isBgmEteindreAlarme, setIsBgmEteindreAlarme] = useState(false);
-  const [isBgmBougerLit, setIsBgmEBougerLit] = useState(false);
+  const [isBgmBougerLit, setIsBgmBougerLit] = useState(false);
 
   // IMGS
   const [isBgChambre, setIsBgChambre] = useState(false);
   const [isBgBack, setIsBgBack] = useState(false);
   const [isProfilSuzyPyjama, setIsProfilSuzyPyjama] = useState(false);
+
   // IMGS PROFILS CINEMATIQUE
   const [isProfilSuzyCinematique, setIsProfilSuzyCinematique] = useState(false);
 
   // Mode de jeu
   const [isIconArmoire, setIsIconArmoire] = useState(false);
   const [isIconPorteChambreSuzy, setIsIconPorteChambreSuzy] = useState(false);
-  const [isShowDialogueGamePlay, setIsShowDialogueGamePlay] = useState(false);
+  const [isShowDialogueArmoire, setIsShowDialogueArmoire] = useState(false);
 
-  const [isBgBackNonCinematique, setIsBgBackNonCinematique] = useState(false);
+  const [isBgBackNonCinematique, setIsBgBlackNonCinematique] = useState(false);
 
 
   const habiller = false;
@@ -82,7 +86,7 @@ const ACT0 = () => {
       }
 
       if (currentIndex === 4) {
-        setIsBgmEBougerLit(true)
+        setIsBgmBougerLit(true)
       }
 
       if (currentIndex === 2) {
@@ -115,45 +119,45 @@ const ACT0 = () => {
 
   const handleClickInteraction2 = () => {
     setInteractionsIndex2(interactionsIndex2 + 1);
-  
+
     setIsBgBack(true); // Mettre le fond noir lorsque l'interaction est terminée
     setIsIconArmoire(false);
     setIsIconPorteChambreSuzy(false);
-    setIsBgBackNonCinematique(false); // Mettre isBgBackNonCinematique à faux lorsque l'interaction est terminée
+    setIsBgBlackNonCinematique(false);
   };
-  
+
   const handleShowDialogueGamePlay = (habiller) => {
 
     // Si les conditons ne sont pas remplies, affiche le dialogue Porte Chambre de Suzy
     if (habiller === true) {
-      setIsShowDialogueGamePlay(false);
+      setIsShowDialogueArmoire(false);
       setIsProfilSuzyPyjama(false);
       setIsBgBack(true);
     } else {
-      setIsShowDialogueGamePlay(true);
+      setIsShowDialogueArmoire(true);
       setIsProfilSuzyPyjama(true);
     }
     // A AJOUTER -> SINON SORTIE DE LA CHAMBRE
   };
 
 
-  const handleClickHabits = () => {
-    const habiller = true;
-
-    if (habiller) {
-      setIsBgChambre(false);
-      setIsIconArmoire(false);
-      setIsIconPorteChambreSuzy(false);
-      setIsBgBackNonCinematique(true); // Déclenche la suite des actions lorsque isBgBackNonCinematique devient vrai
-    }
+  const handleClickIconArmoire = () => {
+    const delay = 2000;
+    // Déclencher une suite d'événements pour l'interaction avec l'icône de l'armoire
+    setIsBgChambre(false);
+    setIsIconArmoire(false);
+    setIsIconPorteChambreSuzy(false);
+    setIsBgmPlaying(false);
+    setIsBgBlackNonCinematique(true);
+    setIsBgmBougerLit(true);
+    setTimeout(() => {
+      setIsBgBlackNonCinematique(false);
+      setIsBgChambre(true);
+      // setIsIconArmoire(true); // ----------> A RETIRER APRES LES ESSAIES
+      setIsIconPorteChambreSuzy(true);
+      setIsBgmPlaying(true);
+    }, delay);
   };
-
-  useEffect(() => {
-    if (isBgBackNonCinematique) {
-      setIsBgmEBougerLit(true);
-      setIsShowDialogueGamePlay(true);
-    }
-  }, [isBgBackNonCinematique]);
 
 
   // Cette fonction peut être appelée lorsque vous avez terminé avec le dialogue
@@ -169,6 +173,10 @@ const ACT0 = () => {
       setDisplayText(true); // Apparaitre le texte au chargement de la page
     }
   }, []); // Le tableau vide en seconde argument signifie que cet effet ne s'exécutera qu'une seule fois, au chargement initial de la page
+
+  // if (isIconArmoire) {
+  //   setIsIconArmoire(true);
+  // }
 
   return (
     <div id="chapitre1">
@@ -216,7 +224,7 @@ const ACT0 = () => {
 
       {/* Mode de jeu */}
       {isIconArmoire && (
-        <div className="Icon_Armoire" onClick={handleClickHabits}>
+        <div className="Icon_Armoire" onClick={handleClickIconArmoire}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
             <path
               fill="#c00000"
@@ -225,16 +233,18 @@ const ACT0 = () => {
               d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"
             />
           </svg>
-          {isShowDialogueGamePlay && (
+        </div>
+      )}
+      {isBgBackNonCinematique && (
+        <div className="Bg_Black_Non_Cinematique">
+          <audio src={BougerLit} autoPlay />
+          {isShowDialogueArmoire && (
             <Dialogue
               nom={interactionsArmoire[interactionsIndex2].nom}
               onClick={handleClickInteraction2}
             >
               {interactionsArmoire[interactionsIndex2].texte}
             </Dialogue>
-          )}
-          {isBgBackNonCinematique && (
-            <div className="Bg_Black_Non_Cinematique"></div>
           )}
         </div>
       )}
@@ -248,11 +258,11 @@ const ACT0 = () => {
               d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"
             />
           </svg>
-          {isShowDialogueGamePlay && (
-            <Dialogue nom={interactions[interactionsIndex].nom} onClick={handleClickInteraction}>
-              {interactions[interactionsIndex].texte}
-            </Dialogue>
-          )}
+          {/* {isShowDialogueGamePlay && (
+          <Dialogue nom={interactions[interactionsIndex].nom} onClick={handleClickInteraction}>
+            {interactions[interactionsIndex].texte}
+          </Dialogue>
+        )} */}
         </div>
       )}
     </div>
