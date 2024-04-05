@@ -55,6 +55,7 @@ const ACT0 = () => {
   const [isBgChambre, setIsBgChambre] = useState(false);
   const [isBgBack, setIsBgBack] = useState(false);
   const [isProfilSuzyPyjama, setIsProfilSuzyPyjama] = useState(false);
+  const [isProfilSuzyEcole, setIsProfilSuzyEcole] = useState(false);
 
   // IMGS PROFILS CINEMATIQUE
   const [isProfilSuzyCinematique, setIsProfilSuzyCinematique] = useState(false);
@@ -110,20 +111,9 @@ const ACT0 = () => {
   };
 
   const handleClickInteraction = () => {
-    setInteractionsIndex(interactionsIndex + 1);
+    setInteractionsIndex2(interactionsIndex2 + 1);
     setIsBgChambre(true);
     setIsIconPorteChambreSuzy(true);
-    setIsIconArmoire(true);
-    setIsBgBack(false);
-  }
-
-  const handleClickInteraction2 = () => {
-    setInteractionsIndex2(interactionsIndex2 + 1);
-
-    setIsBgBack(true); // Mettre le fond noir lorsque l'interaction est terminée
-    setIsIconArmoire(false);
-    setIsIconPorteChambreSuzy(false);
-    setIsBgBlackNonCinematique(false);
   };
 
   const handleShowDialogueGamePlay = (habiller) => {
@@ -135,7 +125,7 @@ const ACT0 = () => {
       setIsBgBack(true);
     } else {
       setIsShowDialogueArmoire(true);
-      setIsProfilSuzyPyjama(true);
+      setIsProfilSuzyEcole(true);
     }
     // A AJOUTER -> SINON SORTIE DE LA CHAMBRE
   };
@@ -147,7 +137,6 @@ const ACT0 = () => {
     setIsBgChambre(false);
     setIsIconArmoire(false);
     setIsIconPorteChambreSuzy(false);
-    setIsBgmPlaying(false);
     setIsBgBlackNonCinematique(true);
     setIsBgmBougerLit(true);
     setTimeout(() => {
@@ -155,7 +144,8 @@ const ACT0 = () => {
       setIsBgChambre(true);
       // setIsIconArmoire(true); // ----------> A RETIRER APRES LES ESSAIES
       setIsIconPorteChambreSuzy(true);
-      setIsBgmPlaying(true);
+      setIsShowDialogueArmoire(true);
+      setIsProfilSuzyEcole(true);
     }, delay);
   };
 
@@ -173,10 +163,6 @@ const ACT0 = () => {
       setDisplayText(true); // Apparaitre le texte au chargement de la page
     }
   }, []); // Le tableau vide en seconde argument signifie que cet effet ne s'exécutera qu'une seule fois, au chargement initial de la page
-
-  // if (isIconArmoire) {
-  //   setIsIconArmoire(true);
-  // }
 
   return (
     <div id="chapitre1">
@@ -238,16 +224,21 @@ const ACT0 = () => {
       {isBgBackNonCinematique && (
         <div className="Bg_Black_Non_Cinematique">
           <audio src={BougerLit} autoPlay />
-          {isShowDialogueArmoire && (
-            <Dialogue
-              nom={interactionsArmoire[interactionsIndex2].nom}
-              onClick={handleClickInteraction2}
-            >
-              {interactionsArmoire[interactionsIndex2].texte}
-            </Dialogue>
-          )}
         </div>
       )}
+      {isShowDialogueArmoire && (
+        <Dialogue
+          nom={interactionsArmoire[interactionsIndex2].nom}
+          onClick={handleClickInteraction}
+        >
+          {interactionsArmoire[interactionsIndex2].texte}
+        </Dialogue>
+      )}
+
+      {isProfilSuzyEcole && (
+        <div className="Suzy_Ecole_Neutre"></div>
+      )}
+
       {isIconPorteChambreSuzy && (
         <div className="Icon_Porte_Chambre_Suzy" onClick={handleShowDialogueGamePlay}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
