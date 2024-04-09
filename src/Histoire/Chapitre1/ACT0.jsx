@@ -113,7 +113,6 @@ const ACT0 = () => {
   const handleClickInteraction = () => {
     setInteractionsIndex2(interactionsIndex2 + 1);
     setIsBgChambre(true);
-    setIsIconPorteChambreSuzy(true);
   };
 
   const handleShowDialogueGamePlay = (habiller) => {
@@ -142,21 +141,13 @@ const ACT0 = () => {
     setTimeout(() => {
       setIsBgBlackNonCinematique(false);
       setIsBgChambre(true);
-      // setIsIconArmoire(true); // ----------> A RETIRER APRES LES ESSAIES
-      setIsIconPorteChambreSuzy(true);
       setIsShowDialogueArmoire(true);
       setIsProfilSuzyEcole(true);
+      setIsShowDialogueArmoire(false);
     }, delay);
   };
 
-
-  // Cette fonction peut être appelée lorsque vous avez terminé avec le dialogue
-  const handleDialogueEnd = () => {
-    setIsIconArmoire(true);
-    setIsIconPorteChambreSuzy(true);
-    setIsBgChambre(true);
-  };
-
+  // Fait apparaitre immédiatement les éléments dès le chargement
   useEffect(() => {
     if (currentIndex === 0) {
       setIsBgBack(true); // Apparaitre bg noir au chargement de la page
@@ -172,7 +163,6 @@ const ACT0 = () => {
           {dialogues[currentIndex].texte}
         </Dialogue>
       )}
-
 
       {/* Audios */}
       {isBgmEteindreAlarme && (
@@ -221,16 +211,16 @@ const ACT0 = () => {
           </svg>
         </div>
       )}
+
       {isBgBackNonCinematique && (
         <div className="Bg_Black_Non_Cinematique">
           <audio src={BougerLit} autoPlay />
         </div>
       )}
+
       {isShowDialogueArmoire && (
-        <Dialogue
-          nom={interactionsArmoire[interactionsIndex2].nom}
-          onClick={handleClickInteraction}
-        >
+        <Dialogue nom={interactionsArmoire[interactionsIndex2].nom}
+          onClick={handleClickInteraction}>
           {interactionsArmoire[interactionsIndex2].texte}
         </Dialogue>
       )}
@@ -239,7 +229,7 @@ const ACT0 = () => {
         <div className="Suzy_Ecole_Neutre"></div>
       )}
 
-      {isIconPorteChambreSuzy && (
+      {isIconPorteChambreSuzy && isBgChambre && (
         <div className="Icon_Porte_Chambre_Suzy" onClick={handleShowDialogueGamePlay}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
             <path
