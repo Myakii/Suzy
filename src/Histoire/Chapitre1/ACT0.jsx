@@ -67,6 +67,8 @@ const ACT0 = () => {
 
   const [isBgBackNonCinematique, setIsBgBlackNonCinematique] = useState(false);
 
+  // TEMPS
+  const delay = ms => new Promise(res => setTimeout(res, ms));
 
   const habiller = false;
 
@@ -130,22 +132,28 @@ const ACT0 = () => {
   };
 
 
-  const handleClickIconArmoire = () => {
-    const delay = 2000;
-    // Déclencher une suite d'événements pour l'interaction avec l'icône de l'armoire
+  const handleClickIconArmoire = async () => {
     setIsBgChambre(false);
     setIsIconArmoire(false);
     setIsIconPorteChambreSuzy(false);
     setIsBgBlackNonCinematique(true);
     setIsBgmBougerLit(true);
-    setTimeout(() => {
-      setIsBgBlackNonCinematique(false);
-      setIsBgChambre(true);
-      setIsShowDialogueArmoire(true);
-      setIsProfilSuzyEcole(true);
-      setIsShowDialogueArmoire(false);
-    }, delay);
+    await delay(2000);
+    setIsBgBlackNonCinematique(false);
+    setIsBgChambre(true);
+    setIsShowDialogueArmoire(true);
+    setIsProfilSuzyEcole(true);
   };
+
+  // Après avoir défini le statut du dialogue, vérifie si c'est le dernier dialogue
+  useEffect(() => {
+    if (isShowDialogueArmoire && interactionsIndex2 === interactionsArmoire.length - 1) {
+      setIsShowDialogueArmoire(false);
+      setIsProfilSuzyEcole(false);
+      setIsIconPorteChambreSuzy(true);
+    }
+  }, [isShowDialogueArmoire, interactionsIndex2, interactionsArmoire.length]);
+
 
   // Fait apparaitre immédiatement les éléments dès le chargement
   useEffect(() => {
