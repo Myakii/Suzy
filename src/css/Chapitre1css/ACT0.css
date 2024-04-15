@@ -1,14 +1,14 @@
-#chapitre1 {
+#chapitre1_act0 {
     height: 100vh;
 }
 
-#chapitre1 .Bg_Black {
+#chapitre1_act0 .Bg_Black {
     background-color: black;
     height: 100%;
 }
 
 
-#chapitre1 .Bg_Chambre_Suzy {
+#chapitre1_act0 .Bg_Chambre_Suzy {
     background-image: url('src/Assets/Fonds/bg_chambre_suzy_matin.jpg');
     height: 100%;
 
@@ -60,30 +60,30 @@
 
 }
 
-#chapitre1 .Icon_Armoire, #chapitre1 .Icon_Porte_Chambre_Suzy {
+#chapitre1_act0 .Icon_Armoire, #chapitre1_act0 .Icon_Porte_Chambre_Suzy {
     background-color: transparent;
     position: absolute;
 }
 
-#chapitre1 .Icon_Armoire {
+#chapitre1_act0 .Icon_Armoire {
     top: 530px;
     right: 330px;
     cursor: pointer;
 }
 
-#chapitre1 .Icon_Porte_Chambre_Suzy {
+#chapitre1_act0 .Icon_Porte_Chambre_Suzy {
     top: 300px;
     left: 350px;
     cursor: pointer;
 }
 
-#chapitre1 .Icon_Armoire svg, #chapitre1 .Icon_Porte_Chambre_Suzy svg  {
+#chapitre1_act0 .Icon_Armoire svg, #chapitre1_act0 .Icon_Porte_Chambre_Suzy svg  {
     height: 40px;
     animation: moveUpDown 0.8s ease-in-out infinite;
     width: 40px;
 }
 
-#chapitre1 .Suzy_Pyjama_Neutre_Gameplay {
+#chapitre1_act0 .Suzy_Pyjama_Neutre_Gameplay {
     background-image: url('../../Assets/Profils/Suzy/Pyjama_Neutre.png');
     width: 615px;
     height: 600px;
@@ -105,7 +105,7 @@
     opacity: 0.1;
 }
 
-#chapitre1 .Bg_Black_Non_Cinematique {
+#chapitre1_act0 .Bg_Black_Non_Cinematique {
     background-color: black;
     height: 100%;
 }

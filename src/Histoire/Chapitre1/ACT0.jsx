@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
 
 import "../../css/Chapitre1css/ACT0.css";
 
@@ -10,6 +11,7 @@ import EteintAlarme from "../../Assets/Sons/light-switch.mp3";
 import BougerLit from "../../Assets/Sons/sitting-on-bed-97752.mp3";
 
 import Bgm_Chambre_Suzy from "../../Assets/Musiques/Golden_Eye.mp3";
+import ACT1 from "./ACT1";
 
 const ACT0 = () => {
   const dialogues = [
@@ -43,6 +45,8 @@ const ACT0 = () => {
         "Ce n'est pas tous les jours qu'on a ce genre de sentiment. Peut-être que quelque chose de bien va se produire ?",
     },
   ];
+
+  const [isRedirect, setIsRedirect] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [interactionsIndex, setInteractionsIndex] = useState(0);
@@ -133,7 +137,7 @@ const ACT0 = () => {
       setIsShowDialogueArmoire(false);
       setIsProfilSuzyPyjama(false);
       setIsBgBack(true);
-      // A AJOUTER -> SINON SORTIE DE LA CHAMBRE
+      setIsRedirect(true)
     } else {
       setIsShowDialoguePorte(true);
       setIsProfilSuzyPyjama(true);
@@ -188,7 +192,7 @@ const ACT0 = () => {
   }, []); // Le tableau vide en seconde argument signifie que cet effet ne s'exécutera qu'une seule fois, au chargement initial de la page
 
   return (
-    <div id="chapitre1">
+    <div id="chapitre1_act0">
       {/* CINEMATIQUE 1 */}
       {/* Assure que dialogues[currentIndex] est défini avant d'essayer d'accéder à sa propriété 'nom'. */}
       {isDisplayText && (
@@ -283,6 +287,7 @@ const ACT0 = () => {
         </Dialogue>
       )}
       {isBgBack && <div className="BgBlack"></div>}
+      {isRedirect && <Redirect to={ACT1} />}
     </div>
   )
 }
