@@ -1,5 +1,5 @@
 import React from "react";
-import '../css/Components/Dialogue.css'
+import '../styles/Components/Dialogue.css'
 
 export default function Dialogue({ nom, onClick, children, className }) {
   return (
